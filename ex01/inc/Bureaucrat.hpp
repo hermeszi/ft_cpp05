@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/22 21:34:16 by myuen            ###   ########.fr       */
+/*   Updated: 2025/08/23 22:31:44 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <iostream>
 #include <stdexcept>
+
+class Form;
 
 class Bureaucrat
 {
@@ -33,8 +35,10 @@ public:
 	std::string		getName() const;
 	unsigned int	getGrade() const;
 
-	void incrementGrade();
-	void decrementGrade();
+	void	incrementGrade();
+	void	decrementGrade();
+
+	void	signForm(Form& form);
 
 	struct GradeTooHighException : public std::exception
 	{

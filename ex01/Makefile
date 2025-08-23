@@ -6,7 +6,7 @@
 #    By: myuen <myuen@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 14:53:29 by myuen             #+#    #+#              #
-#    Updated: 2025/08/22 21:39:26 by myuen            ###   ########.fr        #
+#    Updated: 2025/08/23 22:38:39 by myuen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ OBJ_DIR = obj
 
 SRCS = $(SRC_DIR)/main.cpp \
        $(SRC_DIR)/Bureaucrat.cpp \
+	   $(SRC_DIR)/Form.cpp \
 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

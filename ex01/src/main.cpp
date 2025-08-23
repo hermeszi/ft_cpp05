@@ -6,193 +6,155 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/22 21:28:15 by myuen            ###   ########.fr       */
+/*   Updated: 2025/08/23 22:28:31 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
 #include <iostream>
+#include <string>
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-int main()
+using std::cout; using std::endl;
+
+static void line(const std::string& title = "")
 {
-	std::cout << "=== BUREAUCRAT CLASS TESTING ===" << std::endl << std::endl;
-	
-	// Test 1: Valid Construction Cases
-	std::cout << "--- Test 1: Valid Construction ---" << std::endl;
-	try {
-		// Test default constructor
-		Bureaucrat defaultBureaucrat;
-		std::cout << "Default bureaucrat: " << defaultBureaucrat << std::endl;
-		
-		// Test valid grade at boundaries (1 is highest, 150 is lowest)
-		Bureaucrat highestGrade("Alice", 1);
-		std::cout << "Highest grade: " << highestGrade << std::endl;
-		
-		Bureaucrat lowestGrade("Bob", 150);
-		std::cout << "Lowest grade: " << lowestGrade << std::endl;
-		
-		// Test middle range grade
-		Bureaucrat middleGrade("Charlie", 75);
-		std::cout << "Middle grade: " << middleGrade << std::endl;
-		
-	} catch (const std::exception& e) {
-		std::cout << "Unexpected exception in valid construction: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 2: Invalid Construction - Grade Too High
-	std::cout << "--- Test 2: Invalid Construction - Grade Too High ---" << std::endl;
-	try {
-		// Attempting to create bureaucrat with grade 0 (invalid - too high)
-		Bureaucrat invalidHigh("David", 0);
-		std::cout << "ERROR: Should have thrown exception for grade 0!" << std::endl;
-	} catch (const Bureaucrat::GradeTooHighException& e) {
-		std::cout << "Correctly caught GradeTooHighException: " << e.what() << std::endl;
-	} catch (const std::exception& e) {
-		std::cout << "Caught unexpected exception: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 3: Invalid Construction - Grade Too Low
-	std::cout << "--- Test 3: Invalid Construction - Grade Too Low ---" << std::endl;
-	try {
-		// Attempting to create bureaucrat with grade 151 (invalid - too low)
-		Bureaucrat invalidLow("Eve", 151);
-		std::cout << "ERROR: Should have thrown exception for grade 151!" << std::endl;
-	} catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cout << "Correctly caught GradeTooLowException: " << e.what() << std::endl;
-	} catch (const std::exception& e) {
-		std::cout << "Caught unexpected exception: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 4: Grade Increment (Promotion - Grade Goes Down Numerically)
-	std::cout << "--- Test 4: Grade Increment (Promotion) ---" << std::endl;
-	try {
-		Bureaucrat promotionTest("Frank", 5);
-		std::cout << "Before increment: " << promotionTest << std::endl;
-		
-		promotionTest.incrementGrade(); // Should go from 5 to 4
-		std::cout << "After increment: " << promotionTest << std::endl;
-		
-		// Test incrementing at boundary - should work
-		Bureaucrat boundaryTest("Grace", 2);
-		boundaryTest.incrementGrade(); // Should go from 2 to 1
-		std::cout << "Boundary increment (2->1): " << boundaryTest << std::endl;
-		
-	} catch (const std::exception& e) {
-		std::cout << "Unexpected exception during valid increment: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 5: Invalid Increment - Already at Highest Grade
-	std::cout << "--- Test 5: Invalid Increment - Already at Highest ---" << std::endl;
-	try {
-		Bureaucrat maxGradeTest("Henry", 1);
-		std::cout << "Starting at highest grade: " << maxGradeTest << std::endl;
-		
-		maxGradeTest.incrementGrade(); // Should throw exception
-		std::cout << "ERROR: Should have thrown exception!" << std::endl;
-	} catch (const Bureaucrat::GradeTooHighException& e) {
-		std::cout << "Correctly caught exception when trying to increment grade 1: " << e.what() << std::endl;
-	} catch (const std::exception& e) {
-		std::cout << "Caught unexpected exception: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 6: Grade Decrement (Demotion - Grade Goes Up Numerically)
-	std::cout << "--- Test 6: Grade Decrement (Demotion) ---" << std::endl;
-	try {
-		Bureaucrat demotionTest("Iris", 10);
-		std::cout << "Before decrement: " << demotionTest << std::endl;
-		
-		demotionTest.decrementGrade(); // Should go from 10 to 11
-		std::cout << "After decrement: " << demotionTest << std::endl;
-		
-		// Test decrementing at boundary - should work
-		Bureaucrat boundaryTest("Jack", 149);
-		boundaryTest.decrementGrade(); // Should go from 149 to 150
-		std::cout << "Boundary decrement (149->150): " << boundaryTest << std::endl;
-		
-	} catch (const std::exception& e) {
-		std::cout << "Unexpected exception during valid decrement: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 7: Invalid Decrement - Already at Lowest Grade
-	std::cout << "--- Test 7: Invalid Decrement - Already at Lowest ---" << std::endl;
-	try {
-		Bureaucrat minGradeTest("Kate", 150);
-		std::cout << "Starting at lowest grade: " << minGradeTest << std::endl;
-		
-		minGradeTest.decrementGrade(); // Should throw exception
-		std::cout << "ERROR: Should have thrown exception!" << std::endl;
-	} catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cout << "Correctly caught exception when trying to decrement grade 150: " << e.what() << std::endl;
-	} catch (const std::exception& e) {
-		std::cout << "Caught unexpected exception: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 8: Copy Constructor
-	std::cout << "--- Test 8: Copy Constructor ---" << std::endl;
-	try {
-		Bureaucrat original("Liam", 42);
-		std::cout << "Original bureaucrat: " << original << std::endl;
-		
-		Bureaucrat copy(original);
-		std::cout << "Copied bureaucrat: " << copy << std::endl;
-		
-		// Verify they're independent by modifying one
-		copy.incrementGrade();
-		std::cout << "After incrementing copy:" << std::endl;
-		std::cout << "Original: " << original << std::endl;
-		std::cout << "Copy: " << copy << std::endl;
-		
-	} catch (const std::exception& e) {
-		std::cout << "Exception during copy constructor test: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 9: Assignment Operator
-	std::cout << "--- Test 9: Assignment Operator ---" << std::endl;
-	try {
-		Bureaucrat source("Maya", 25);
-		Bureaucrat target("Noah", 100);
-		
-		std::cout << "Before assignment:" << std::endl;
-		std::cout << "Source: " << source << std::endl;
-		std::cout << "Target: " << target << std::endl;
-		
-		target = source;
-		std::cout << "After assignment:" << std::endl;
-		std::cout << "Source: " << source << std::endl;
-		std::cout << "Target: " << target << std::endl;
-		
-		// Note: If name is const, target should keep its original name
-		// but adopt source's grade
-		
-	} catch (const std::exception& e) {
-		std::cout << "Exception during assignment test: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	// Test 10: Getter Methods
-	std::cout << "--- Test 10: Getter Methods ---" << std::endl;
-	try {
-		Bureaucrat getterTest("Olivia", 88);
-		
-		std::cout << "Using getters separately:" << std::endl;
-		std::cout << "Name: " << getterTest.getName() << std::endl;
-		std::cout << "Grade: " << getterTest.getGrade() << std::endl;
-		std::cout << "Using insertion operator: " << getterTest << std::endl;
-		
-	} catch (const std::exception& e) {
-		std::cout << "Exception during getter test: " << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	
-	std::cout << "=== ALL TESTS COMPLETED ===" << std::endl;
-	
-	return 0;
+    cout << "\n==== " << title << " " << std::string(50 - std::min<size_t>(title.size(), 50), '=') << "\n";
+}
+
+int main() {
+    // ---------------- ex00: Bureaucrat basic construction & streaming ----------------
+    line("ex00: construct & print");
+    try {
+        Bureaucrat a("Alice", 1);
+        Bureaucrat b("Bob", 150);
+        cout << a << "\n";
+        cout << b << "\n";
+    } catch (const std::exception& e) {
+        cout << "Unexpected exception: " << e.what() << endl;
+    }
+
+    // ---------------- ex00: invalid construction ----------------
+    line("ex00: invalid construction");
+    try {
+        Bureaucrat badHigh("TooHigh", 0); // should throw GradeTooHigh
+        (void)badHigh;
+    } catch (const std::exception& e) {
+        cout << "Caught (0): " << e.what() << endl;
+    }
+    try {
+        Bureaucrat badLow("TooLow", 151); // should throw GradeTooLow
+        (void)badLow;
+    } catch (const std::exception& e) {
+        cout << "Caught (151): " << e.what() << endl;
+    }
+
+    // ---------------- ex00: increment/decrement boundaries ----------------
+    line("ex00: increment/decrement");
+    try {
+        Bureaucrat c("Carol", 2);
+        cout << c << "\n";
+        c.incrementGrade(); // goes to 1
+        cout << c << "\n";
+        try {
+            c.incrementGrade(); // should throw (would go above 1)
+        } catch (const std::exception& e) {
+            cout << "increment at 1 -> exception: " << e.what() << endl;
+        }
+    } catch (const std::exception& e) {
+        cout << "Unexpected: " << e.what() << endl;
+    }
+
+    try {
+        Bureaucrat d("Dave", 149);
+        cout << d << "\n";
+        d.decrementGrade(); // goes to 150
+        cout << d << "\n";
+        try {
+            d.decrementGrade(); // should throw (would go below 150)
+        } catch (const std::exception& e) {
+            cout << "decrement at 150 -> exception: " << e.what() << endl;
+        }
+    } catch (const std::exception& e) {
+        cout << "Unexpected: " << e.what() << endl;
+    }
+
+    // ---------------- ex01: Form basics ----------------
+    line("ex01: Form construct & print");
+    try {
+        Form f1("TopSecret", 10, 5);
+        Form f2("Trivial", 150, 150);
+        cout << f1 << "\n";
+        cout << f2 << "\n";
+    } catch (const std::exception& e) {
+        cout << "Form construction exception: " << e.what() << endl;
+    }
+
+    // ---------------- ex01: Form invalid construction ----------------
+    line("ex01: Form invalid construction");
+    try { Form bad1("BadSignHigh", 0, 50); }
+    catch (const std::exception& e) { cout << "Caught bad1: " << e.what() << endl; }
+    try { Form bad2("BadSignLow", 151, 50); }
+    catch (const std::exception& e) { cout << "Caught bad2: " << e.what() << endl; }
+    try { Form bad3("BadExecHigh", 50, 0); }
+    catch (const std::exception& e) { cout << "Caught bad3: " << e.what() << endl; }
+    try { Form bad4("BadExecLow", 50, 151); }
+    catch (const std::exception& e) { cout << "Caught bad4: " << e.what() << endl; }
+
+    // ---------------- ex01: beSigned directly ----------------
+    line("ex01: beSigned");
+    try {
+        Bureaucrat chief("Chief", 5);
+        Bureaucrat peon("Peon", 140);
+        Form tough("ToughForm", 10, 10);
+        Form easy("EasyForm", 140, 140);
+
+        cout << tough << "\n" << easy << "\n";
+
+        // peon fails on tough (needs 10)
+        try {
+            tough.beSigned(peon);
+            cout << "Unexpected: peon signed tough\n";
+        } catch (const std::exception& e) {
+            cout << "peon failed to sign tough: " << e.what() << endl;
+        }
+
+        // chief signs tough
+        try {
+            tough.beSigned(chief);
+            cout << "chief signed tough\n";
+        } catch (const std::exception& e) {
+            cout << "Unexpected: chief failed: " << e.what() << endl;
+        }
+
+        // peon signs easy (140 required)
+        try {
+            easy.beSigned(peon);
+            cout << "peon signed easy\n";
+        } catch (const std::exception& e) {
+            cout << "Unexpected: peon failed: " << e.what() << endl;
+        }
+
+        cout << tough << "\n" << easy << "\n";
+    } catch (const std::exception& e) {
+        cout << "Unexpected: " << e.what() << endl;
+    }
+
+    // ---------------- ex01: Bureaucrat::signForm wrapper ----------------
+    line("ex01: Bureaucrat::signForm");
+    try {
+        Bureaucrat exec("Exec", 50);
+        Bureaucrat junior("Junior", 120);
+        Form mid("MidForm", 75, 75);
+        Form hard("HardForm", 25, 25);
+
+        exec.signForm(mid);   // should succeed (50 <= 75)
+        junior.signForm(mid); // already signed; your beSigned may ignore or keep signed
+        junior.signForm(hard); // should fail (120 > 25)
+    } catch (const std::exception& e) {
+        cout << "Unexpected: " << e.what() << endl;
+    }
+
+    line("done");
+    return 0;
 }

@@ -6,11 +6,12 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/22 21:38:23 by myuen            ###   ########.fr       */
+/*   Updated: 2025/08/23 22:55:42 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 using std::string;
 using std::endl;
@@ -65,6 +66,19 @@ void Bureaucrat::decrementGrade()
 	_grade = gradeValid(++_grade);
 }
 
+void Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		cout << this->getName() << " signed " << form.getName() << "." << endl;
+	}
+	catch(const Form::GradeTooLowException& e)
+	{
+		cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what() << endl;
+	}
+}
+
 unsigned int Bureaucrat::gradeValid(unsigned int grade)
 {
 	if (grade < 1)
@@ -76,6 +90,6 @@ unsigned int Bureaucrat::gradeValid(unsigned int grade)
 
 std::ostream& operator<< (std::ostream& os, const Bureaucrat& bureaucrat)
 {
-	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << endl;
 	return (os);
 }
