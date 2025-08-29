@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/29 20:52:58 by myuen            ###   ########.fr       */
+/*   Updated: 2025/08/29 20:42:45 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int main() {
             cout << "Unexpected: peon failed: " << e.what() << endl;
         }
 
-        cout << tough << "\n" << easy << "\n" << endl;;
+        cout << tough << "\n" << easy << "\n";
     } 
     catch (const std::exception& e)
     {

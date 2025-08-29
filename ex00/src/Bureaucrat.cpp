@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/23 22:22:05 by myuen            ###   ########.fr       */
+/*   Updated: 2025/08/25 14:54:13 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ Bureaucrat::Bureaucrat() : _name("Unnamed"), _grade(150)
 
 Bureaucrat::Bureaucrat(string name, unsigned int grade) : _name(name), _grade(gradeValid(grade))
 {
-	cout << "Bureaucrat constructor called for: " << _name  << " Grade: " << _grade << endl;
+	cout << "Bureaucrat constructor called for: "
+		 << _name
+		 << "\n    Grade: " 
+		 << _grade
+		 << endl;
 }
 
 Bureaucrat::Bureaucrat	(const Bureaucrat& copy) : _name(copy.getName()), _grade(gradeValid(copy.getGrade()))
@@ -43,7 +47,9 @@ Bureaucrat& Bureaucrat::operator= (const Bureaucrat& other)
 
 Bureaucrat::~Bureaucrat()
 {
-	cout << "Bureaucrat destructor: " << _name << endl;
+	cout << "Bureaucrat destructor: " 
+		 << _name 
+		 << endl;
 }
 
 string	Bureaucrat::getName() const

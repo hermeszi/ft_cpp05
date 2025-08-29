@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include <iostream>
 class Bureaucrat;
@@ -29,7 +29,7 @@ private:
 public:
 	Form();
 	Form(std::string name, unsigned int gradeToSign, unsigned int gradeToEx);
-	virtual ~Form();
+	virtual ~Form() {};
 	Form(const Form& copy);
 	Form& operator=(const Form& other);
 
@@ -39,6 +39,7 @@ public:
 	unsigned int    getGradeToEx() const;
 
 	void            beSigned(const Bureaucrat& bureaucrat);
+	void 			execute(Bureaucrat const & executor) const = 0;
 
 	struct GradeTooHighException : public std::exception
 	{

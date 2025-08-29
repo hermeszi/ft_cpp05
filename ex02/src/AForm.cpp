@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/29 20:52:38 by myuen            ###   ########.fr       */
+/*   Updated: 2025/08/29 20:52:10 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 using std::string;
 using std::endl;
 using std::cout;
 
-Form::Form()
+AForm::Form()
 :   _name("Unnamed"),
 	_signed(false),
 	_gradeToSign(1),
@@ -27,7 +27,7 @@ Form::Form()
 	cout << "Form DEFAULT constructor called" << endl;
 }
 
-Form::Form(string name, unsigned int gradeToSign, unsigned int gradeToEx) 
+AForm::Form(string name, unsigned int gradeToSign, unsigned int gradeToEx) 
 :   _name(name),
 	_signed(false),
 	_gradeToSign(gradeValid(gradeToSign)),
@@ -42,7 +42,7 @@ Form::Form(string name, unsigned int gradeToSign, unsigned int gradeToEx)
 		 << endl;
 }
 
-Form::Form	(const Form& copy) 
+AForm::Form	(const AForm& copy) 
 :   _name(copy.getName()),
 	_signed(copy.getSigned()),
 	_gradeToSign(gradeValid(copy.getGradeToSign())), 
@@ -51,7 +51,7 @@ Form::Form	(const Form& copy)
 	//cout << "Form Copy-Constructor called" << endl;
 }
 
-Form& Form::operator= (const Form& other)
+AForm& Form::operator= (const AForm& other)
 {
 	//cout << "Form Copy-Ass = called" << endl;
 	if (this != &other)
@@ -61,32 +61,32 @@ Form& Form::operator= (const Form& other)
 	return (*this);
 }
 
-Form::~Form()
+AForm::~Form()
 {
 	cout << "Form destructor: " << _name << endl;
 }
 
-string	Form::getName() const
+string	AForm::getName() const
 {
 	return (this->_name);	
 }
 
-unsigned int	Form::getGradeToSign() const
+unsigned int	AForm::getGradeToSign() const
 {
 	return (this->_gradeToSign);
 }
 
-unsigned int	Form::getGradeToEx() const
+unsigned int	AForm::getGradeToEx() const
 {
 	return (this->_gradeToEx);
 }
 
-bool    Form::getSigned() const
+bool    AForm::getSigned() const
 {
 	return (this->_signed);
 }
 
-void Form::beSigned(const Bureaucrat& bureaucrat)
+void AForm::beSigned(const Bureaucrat& bureaucrat)
 {
 	if (_signed == false)
 	{
@@ -101,7 +101,7 @@ void Form::beSigned(const Bureaucrat& bureaucrat)
 	}
 }
 
-unsigned int Form::gradeValid(unsigned int grade)
+unsigned int AForm::gradeValid(unsigned int grade)
 {
 	if (grade < 1)
 		throw GradeTooHighException();
@@ -110,7 +110,7 @@ unsigned int Form::gradeValid(unsigned int grade)
 	return (grade);
 }
 
-std::ostream& operator<<(std::ostream& os, const Form& f)
+std::ostream& operator<<(std::ostream& os, const AForm& f)
 {
 	os	<< f.getName()
 		<< " (signed: " << std::boolalpha << static_cast<bool>(f.getSigned()) << ")\n"
