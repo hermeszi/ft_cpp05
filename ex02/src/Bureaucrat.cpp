@@ -6,12 +6,14 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/25 14:56:06 by myuen            ###   ########.fr       */
+/*   Updated: 2025/09/13 18:46:57 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include <iostream>
+#include <stdexcept>
 
 using std::string;
 using std::endl;
@@ -72,14 +74,14 @@ void Bureaucrat::decrementGrade()
 	_grade = gradeValid(++_grade);
 }
 
-void Bureaucrat::signForm(Form& form)
+void Bureaucrat::signForm(AForm& form)
 {
 	try
 	{
 		form.beSigned(*this);
 		cout << this->getName() << " signed " << form.getName() << endl;
 	}
-	catch(const Form::GradeTooLowException& e)
+	catch(const AForm::GradeTooLowException& e)
 	{
 		cout << this->getName() 
 			 << " couldn't sign " 

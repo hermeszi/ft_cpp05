@@ -6,10 +6,12 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/29 20:52:10 by myuen            ###   ########.fr       */
+/*   Updated: 2025/09/13 18:50:05 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include <stdexcept>
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
@@ -17,23 +19,23 @@ using std::string;
 using std::endl;
 using std::cout;
 
-AForm::Form()
+AForm::AForm()
 :   _name("Unnamed"),
 	_signed(false),
 	_gradeToSign(1),
 	_gradeToEx(1)
 
 {
-	cout << "Form DEFAULT constructor called" << endl;
+	cout << "AForm DEFAULT constructor called" << endl;
 }
 
-AForm::Form(string name, unsigned int gradeToSign, unsigned int gradeToEx) 
+AForm::AForm(string name, unsigned int gradeToSign, unsigned int gradeToEx) 
 :   _name(name),
 	_signed(false),
 	_gradeToSign(gradeValid(gradeToSign)),
 	_gradeToEx(gradeValid(gradeToEx))
 {
-	cout << "Form constructor called for: " 
+	cout << "AForm constructor called for: " 
 		 << _name
 		 << "\n    Grade to sign   : "
 		 << _gradeToSign
@@ -42,28 +44,23 @@ AForm::Form(string name, unsigned int gradeToSign, unsigned int gradeToEx)
 		 << endl;
 }
 
-AForm::Form	(const AForm& copy) 
+AForm::AForm	(const AForm& copy) 
 :   _name(copy.getName()),
 	_signed(copy.getSigned()),
 	_gradeToSign(gradeValid(copy.getGradeToSign())), 
 	_gradeToEx(gradeValid(copy.getGradeToEx()))
 {
-	//cout << "Form Copy-Constructor called" << endl;
+	//cout << "AForm Copy-Constructor called" << endl;
 }
 
-AForm& Form::operator= (const AForm& other)
+AForm& AForm::operator= (const AForm& other)
 {
-	//cout << "Form Copy-Ass = called" << endl;
+	//cout << "AForm Copy-Ass = called" << endl;
 	if (this != &other)
 	{
 		this->_signed = other.getSigned();
 	}
 	return (*this);
-}
-
-AForm::~Form()
-{
-	cout << "Form destructor: " << _name << endl;
 }
 
 string	AForm::getName() const

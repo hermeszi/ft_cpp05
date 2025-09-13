@@ -6,17 +6,16 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/23 22:31:44 by myuen            ###   ########.fr       */
+/*   Updated: 2025/09/13 18:46:41 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include <iostream>
-#include <stdexcept>
+#include <string>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -38,7 +37,7 @@ public:
 	void	incrementGrade();
 	void	decrementGrade();
 
-	void	signForm(Form& form);
+	void	signForm(AForm& AForm);
 
 	struct GradeTooHighException : public std::exception
 	{
