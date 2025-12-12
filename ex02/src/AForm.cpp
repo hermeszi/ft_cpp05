@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/09/13 18:50:05 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/12 21:13:02 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ using std::cout;
 
 AForm::AForm()
 :   _name("Unnamed"),
+	_target(""),
 	_signed(false),
 	_gradeToSign(1),
 	_gradeToEx(1)
-
 {
 	cout << "AForm DEFAULT constructor called" << endl;
 }
 
-AForm::AForm(string name, unsigned int gradeToSign, unsigned int gradeToEx) 
+AForm::AForm(string name, string target, unsigned int gradeToSign, unsigned int gradeToEx) 
 :   _name(name),
+	_target(target),
 	_signed(false),
 	_gradeToSign(gradeValid(gradeToSign)),
 	_gradeToEx(gradeValid(gradeToEx))
@@ -46,6 +47,7 @@ AForm::AForm(string name, unsigned int gradeToSign, unsigned int gradeToEx)
 
 AForm::AForm	(const AForm& copy) 
 :   _name(copy.getName()),
+	_target(copy.getTarget()),
 	_signed(copy.getSigned()),
 	_gradeToSign(gradeValid(copy.getGradeToSign())), 
 	_gradeToEx(gradeValid(copy.getGradeToEx()))
@@ -58,7 +60,7 @@ AForm& AForm::operator= (const AForm& other)
 	//cout << "AForm Copy-Ass = called" << endl;
 	if (this != &other)
 	{
-		this->_signed = other.getSigned();
+		this->_target = other.getTarget();
 	}
 	return (*this);
 }
@@ -66,6 +68,11 @@ AForm& AForm::operator= (const AForm& other)
 string	AForm::getName() const
 {
 	return (this->_name);	
+}
+
+string AForm::getTarget() const
+{
+	return (this->_target);
 }
 
 unsigned int	AForm::getGradeToSign() const
@@ -109,11 +116,14 @@ unsigned int AForm::gradeValid(unsigned int grade)
 
 std::ostream& operator<<(std::ostream& os, const AForm& f)
 {
-	os	<< f.getName()
-		<< " (signed: " << std::boolalpha << static_cast<bool>(f.getSigned()) << ")\n"
+	os	<< " ==== Form name: "
+		<< f.getName() << " ====\n"
+		<< "  Target : " << f.getTarget()
+		<< "\n  Signed : " << std::boolalpha << static_cast<bool>(f.getSigned()) << "\n"
 		<< "  sign grade: " << f.getGradeToSign() << "\n"
 		<< "  exec grade: " << f.getGradeToEx()
-		<< "\n";
+		<< "\n ================="
+		<< endl;
 	return (os);
 }
 

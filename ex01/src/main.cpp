@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/08/29 20:52:58 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/12 18:01:23 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,27 @@ int main() {
         Bureaucrat badHigh("TooHigh", 0); // should throw GradeTooHigh
         (void)badHigh;
     }
-    catch (const std::exception& e) 
+    catch (const Bureaucrat::GradeTooHighException& e) 
     {
         cout << "Caught (0): " << e.what() << endl;
     }
+    catch (const std::exception& e)
+    {
+        cout << "Unexpected exception: " << e.what() << endl;
+    }
+    
     try
     {
         Bureaucrat badLow("TooLow", 151); // should throw GradeTooLow
         (void)badLow;
     }
-    catch (const std::exception& e) 
+    catch (const Bureaucrat::GradeTooLowException& e)
     {
         cout << "Caught (151): " << e.what() << endl;
+    }
+    catch (const std::exception& e)
+    {
+        cout << "Unexpected exception: " << e.what() << endl;
     }
 
     // ---------------- ex00: increment/decrement boundaries ----------------

@@ -6,7 +6,7 @@
 #    By: myuen <myuen@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 14:53:29 by myuen             #+#    #+#              #
-#    Updated: 2025/09/13 18:40:58 by myuen            ###   ########.fr        #
+#    Updated: 2025/12/12 20:10:49 by myuen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ OBJ_DIR = obj
 SRCS = $(SRC_DIR)/main.cpp \
        $(SRC_DIR)/Bureaucrat.cpp \
 	   $(SRC_DIR)/AForm.cpp \
+	   $(SRC_DIR)/ShrubberyCreationForm.cpp \
 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
