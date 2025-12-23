@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/12/12 21:03:55 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/23 21:37:55 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ public:
 	
 };
 
-//std::ostream& operator<< (std::ostream& os, const ShrubberyCreationForm& f);
 
 #endif

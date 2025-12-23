@@ -12,6 +12,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -38,6 +40,8 @@ static void showFile(const std::string& path)
 
 int main()
 {
+    std::srand(std::time(0)); // Seed the generator
+
     header("Create form + try execute BEFORE signing (should fail / print 'Form not signed!')");
     try
     {
@@ -72,7 +76,7 @@ int main()
     header("Sign OK, then execute with LOW executor grade (should throw GradeTooLowException)");
     try
     {
-        ShrubberyCreationForm f("park");
+        ShrubberyCreationForm f("fail");
         Bureaucrat signer("Signer", 1);     // strong enough to sign
         Bureaucrat lowExec("LowExec", 150); // too weak to execute
 
@@ -83,7 +87,7 @@ int main()
         catch (const std::exception& e) { std::cout << "Caught execute exception: " << e.what() << "\n"; }
 
         // file should NOT be created on failure
-        showFile("park_shrubbery");
+        showFile("fail_shrubbery");
     }
     catch (const std::exception& e)
     {
@@ -93,7 +97,7 @@ int main()
     header("Sign OK, execute OK (should create <target>_shrubbery)");
     try
     {
-        ShrubberyCreationForm f("office");
+        ShrubberyCreationForm f("42");
         Bureaucrat signer("Signer", 1);
         Bureaucrat exec("Exec", 1);
 

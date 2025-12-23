@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/12/12 21:42:48 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/23 21:34:36 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 
 #define SIGN 145
 #define EXEC 137
-#define TREE_CMD "find >>"
-//| sed 's|[^/]*/|- |g' >>"
-
+#define TREE_CMD "find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g' >>"
 
 using std::string;
 using std::endl;
@@ -75,12 +73,14 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
     fout <<"    |o|        | |         | |\n";
     fout <<"    |.|        | |         | |\n";
     fout <<" \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_\n\n";
+    fout.close();
     
-    std::string cmd = TREE_CMD;
     std::string fileName = this->getTarget() + "_shrubbery";
+    std::string cmd = TREE_CMD;
+    std::string pwd_cmd = "pwd >> " + fileName;
+    std::system(pwd_cmd.c_str());
     cmd += fileName;
     std::system(cmd.c_str());
-    fout.close();
 }
 
 #undef EXEC
