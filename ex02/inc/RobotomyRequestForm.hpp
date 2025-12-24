@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/12/23 21:38:58 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/24 21:17:49 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	virtual ~RobotomyRequestForm() {};
 	RobotomyRequestForm(const RobotomyRequestForm& copy);
 	RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
-	void execute(Bureaucrat const & executor) const;
+	virtual void doExecute() const;
 	
 };
 

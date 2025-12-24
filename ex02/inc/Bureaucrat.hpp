@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/09/13 18:46:41 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/24 21:21:27 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ public:
 	void	decrementGrade();
 
 	void	signForm(AForm& AForm);
+	void 	executeForm(AForm const & form) const;
 
 	struct GradeTooHighException : public std::exception
 	{
@@ -47,6 +48,7 @@ public:
 	{
 		virtual const char* what() const throw() {return "INVALID: Grade is lowest at 150!";}
 	};
+
 };
 
 std::ostream& operator<< (std::ostream& os, const Bureaucrat& bureaucrat);

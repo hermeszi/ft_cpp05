@@ -43,7 +43,8 @@ public:
 	unsigned int    getGradeToEx() const;
 
 	void            beSigned(const Bureaucrat& bureaucrat);
-	virtual void 	execute(Bureaucrat const & executor) const = 0;
+	void 			execute(Bureaucrat const & executor) const;
+	virtual void	doExecute() const = 0;
 
 	struct GradeTooHighException : public std::exception
 	{
@@ -53,7 +54,6 @@ public:
 	{
 		virtual const char* what() const throw() {return "Grade is too LOW";}
 	};
-	
 	struct FormNotSignedException : public std::runtime_error
 	{
 		FormNotSignedException(): std::runtime_error("Form is not signed") {}

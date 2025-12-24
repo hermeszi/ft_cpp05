@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/12/23 21:34:36 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/24 21:17:06 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,25 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     return *this;
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
+void ShrubberyCreationForm::doExecute() const
 {
     std::ofstream fout;  // Output stream
-    
-    if (!this->getSigned())
-        throw AForm::FormNotSignedException();
-    
-    if (executor.getGrade() > EXEC)
-        throw AForm::GradeTooLowException();
         
     fout.open((getTarget() + "_shrubbery").c_str());
     if (!fout)
         throw std::runtime_error("output file failed");
     
 
-    fout <<"           ,@@@@@@@,\n";
-    fout <<"   ,,,.   ,@@@@@@/@@,  .oo8888o.\n";
-    fout <<",&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n";
-    fout <<",%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n";
-    fout <<"%&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n";
-    fout <<"%&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n";
-    fout <<"`&%\\ ` /%&'    |.|        \\ '|8'\n";
-    fout <<"    |o|        | |         | |\n";
-    fout <<"    |.|        | |         | |\n";
-    fout <<" \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_\n\n";
+    fout <<"            ,@@@@@@@,\n";
+    fout <<"    ,,,.   ,@@@@@@/@@,  .oo8888o.\n";
+    fout <<" ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n";
+    fout <<" ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n";
+    fout <<" %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n";
+    fout <<" %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n";
+    fout <<" `&%\\ ` /%&'    |.|        \\ '|8'\n";
+    fout <<"     |o|        | |         | |\n";
+    fout <<"     |.|        | |         | |\n";
+    fout <<"  \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_\n\n";
     fout.close();
     
     std::string fileName = this->getTarget() + "_shrubbery";

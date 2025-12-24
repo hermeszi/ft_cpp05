@@ -6,7 +6,7 @@
 #    By: myuen <myuen@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 14:53:29 by myuen             #+#    #+#              #
-#    Updated: 2025/12/23 22:10:03 by myuen            ###   ########.fr        #
+#    Updated: 2025/12/24 20:16:46 by myuen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = $(SRC_DIR)/main.cpp \
 	   $(SRC_DIR)/AForm.cpp \
 	   $(SRC_DIR)/ShrubberyCreationForm.cpp \
 	   $(SRC_DIR)/RobotomyRequestForm.cpp \
+	   $(SRC_DIR)/PresidentialPardonForm.cpp \
 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
