@@ -1,0 +1,42 @@
+            ,@@@@@@@,
+    ,,,.   ,@@@@@@/@@,  .oo8888o.
+ ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o
+ ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'
+ %&&%&%&/%&&%@@\@@/ /@@@88888\88888'
+ %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
+ `&%\ ` /%&'    |.|        \ '|8'
+     |o|        | |         | |
+     |.|        | |         | |
+  \\/ ._\//_/__/  ,\_//__\\/.  \_//__/_
+
+/home/myuen/core/level5/ft_cpp05/ex02
+.
+|____inc
+| |____Bureaucrat.hpp
+| |____AForm.hpp
+| |____ShrubberyCreationForm.hpp
+| |____RobotomyRequestForm.hpp
+| |____PresidentialPardonForm.hpp
+|____Makefile
+|____src
+| |____Bureaucrat.cpp
+| |____main.cpp
+| |____AForm.cpp
+| |____ShrubberyCreationForm.cpp
+| |____RobotomyRequestForm.cpp
+| |____PresidentialPardonForm.cpp
+|____obj
+| |____main.d
+| |____main.o
+| |____Bureaucrat.d
+| |____Bureaucrat.o
+| |____AForm.d
+| |____AForm.o
+| |____ShrubberyCreationForm.d
+| |____ShrubberyCreationForm.o
+| |____RobotomyRequestForm.d
+| |____RobotomyRequestForm.o
+| |____PresidentialPardonForm.d
+| |____PresidentialPardonForm.o
+|____02
+|____garden_shrubbery

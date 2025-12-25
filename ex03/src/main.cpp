@@ -19,6 +19,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 static void header(const std::string& title)
 {
@@ -313,53 +314,208 @@ static void showFile(const std::string& path)
 //     }
 // }
 
-static void testExecuteFormWithForm(AForm& form, const std::string& formType)
-{
-    std::cout << "\n--- Testing " << formType << " ---\n";
+// static void testExecuteFormWithForm(AForm& form, const std::string& formType)
+// {
+//     std::cout << "\n--- Testing " << formType << " ---\n";
     
-    std::cout << "Test: Execute unsigned form\n";
-    Bureaucrat exec1("HighGuy", 1);
-    exec1.executeForm(form);
+//     std::cout << "Test: Execute unsigned form\n";
+//     Bureaucrat exec1("HighGuy", 1);
+//     exec1.executeForm(form);
     
-    std::cout << "\nTest: Sign then execute with low grade\n";
-    Bureaucrat signer("Signer", 1);
-    Bureaucrat lowExec("LowGuy", 150);
-    signer.signForm(form);
-    lowExec.executeForm(form);
+//     std::cout << "\nTest: Sign then execute with low grade\n";
+//     Bureaucrat signer("Signer", 1);
+//     Bureaucrat lowExec("LowGuy", 150);
+//     signer.signForm(form);
+//     lowExec.executeForm(form);
     
-    std::cout << "\nTest: Execute with sufficient grade\n";
-    exec1.executeForm(form);
-}
+//     std::cout << "\nTest: Execute with sufficient grade\n";
+//     exec1.executeForm(form);
+// }
 
-static void testBureaucratExecuteForm()
+// static void testBureaucratExecuteForm()
+// {
+//     header("BUREAUCRAT EXECUTEFORM() METHOD TESTS");
+    
+//     try
+//     {
+//         ShrubberyCreationForm shrub("garden");
+//         testExecuteFormWithForm(shrub, "ShrubberyCreationForm");
+//         showFile("garden_shrubbery");
+//     }
+//     catch (const std::exception& e)
+//     {
+//         std::cout << "Unexpected exception: " << e.what() << "\n";
+//     }
+    
+//     try
+//     {
+//         RobotomyRequestForm robot("Bender");
+//         testExecuteFormWithForm(robot, "RobotomyRequestForm");
+//     }
+//     catch (const std::exception& e)
+//     {
+//         std::cout << "Unexpected exception: " << e.what() << "\n";
+//     }
+    
+//     try
+//     {
+//         PresidentialPardonForm pardon("Arthur");
+//         testExecuteFormWithForm(pardon, "PresidentialPardonForm");
+//     }
+//     catch (const std::exception& e)
+//     {
+//         std::cout << "Unexpected exception: " << e.what() << "\n";
+//     }
+// }
+
+static void testIntern()
 {
-    header("BUREAUCRAT EXECUTEFORM() METHOD TESTS");
+    header("INTERN MAKEFORM() TESTS");
     
+    header("Test 1: Create valid ShrubberyCreationForm");
     try
     {
-        ShrubberyCreationForm shrub("garden");
-        testExecuteFormWithForm(shrub, "ShrubberyCreationForm");
-        showFile("garden_shrubbery");
+        Intern intern;
+        AForm* form = intern.makeForm("shrubbery creation", "home");
+        
+        if (form)
+        {
+            std::cout << *form << std::endl;
+            
+            Bureaucrat signer("Signer", 1);
+            Bureaucrat exec("Exec", 1);
+            
+            signer.signForm(*form);
+            exec.executeForm(*form);
+            
+            showFile("home_shrubbery");
+            delete form;
+        }
+        else
+        {
+            std::cout << "Form creation returned NULL\n";
+        }
     }
     catch (const std::exception& e)
     {
         std::cout << "Unexpected exception: " << e.what() << "\n";
     }
     
+    header("Test 2: Create valid RobotomyRequestForm");
     try
     {
-        RobotomyRequestForm robot("Bender");
-        testExecuteFormWithForm(robot, "RobotomyRequestForm");
+        Intern intern;
+        AForm* form = intern.makeForm("robotomy request", "Bender");
+        
+        if (form)
+        {
+            std::cout << *form << std::endl;
+            
+            Bureaucrat signer("Signer", 1);
+            Bureaucrat exec("Exec", 1);
+            
+            signer.signForm(*form);
+            exec.executeForm(*form);
+            
+            delete form;
+        }
+        else
+        {
+            std::cout << "Form creation returned NULL\n";
+        }
     }
     catch (const std::exception& e)
     {
         std::cout << "Unexpected exception: " << e.what() << "\n";
     }
     
+    header("Test 3: Create valid PresidentialPardonForm");
     try
     {
-        PresidentialPardonForm pardon("Arthur");
-        testExecuteFormWithForm(pardon, "PresidentialPardonForm");
+        Intern intern;
+        AForm* form = intern.makeForm("presidential pardon", "Arthur");
+        
+        if (form)
+        {
+            std::cout << *form << std::endl;
+            
+            Bureaucrat signer("Signer", 1);
+            Bureaucrat exec("Exec", 1);
+            
+            signer.signForm(*form);
+            exec.executeForm(*form);
+            
+            delete form;
+        }
+        else
+        {
+            std::cout << "Form creation returned NULL\n";
+        }
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Unexpected exception: " << e.what() << "\n";
+    }
+    
+    header("Test 4: Invalid form name (should print error and return NULL)");
+    try
+    {
+        Intern intern;
+        AForm* form = intern.makeForm("invalid form", "target");
+        
+        if (form == NULL)
+        {
+            std::cout << "Correctly returned NULL for invalid form\n";
+        }
+        else
+        {
+            std::cout << "ERROR: Should have returned NULL!\n";
+            delete form;
+        }
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Unexpected exception: " << e.what() << "\n";
+    }
+    
+    header("Test 5: Case sensitivity test");
+    try
+    {
+        Intern intern;
+        AForm* form = intern.makeForm("Shrubbery Creation", "test");
+        
+        if (form == NULL)
+        {
+            std::cout << "Form names are case-sensitive (returned NULL)\n";
+        }
+        else
+        {
+            std::cout << "Form was created despite case difference\n";
+            delete form;
+        }
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "Unexpected exception: " << e.what() << "\n";
+    }
+    
+    header("Test 6: Multiple forms from same intern");
+    try
+    {
+        Intern intern;
+        AForm* form1 = intern.makeForm("shrubbery creation", "garden1");
+        AForm* form2 = intern.makeForm("robotomy request", "Robot1");
+        AForm* form3 = intern.makeForm("presidential pardon", "Criminal1");
+        
+        std::cout   << "3 forms:\n"
+                    << (form1 ? "OK\n" : "Not OK\n") 
+                    << (form2 ? "Ok\n" : "Not Ok\n") 
+                    << (form3 ? "Ok\n" : "Not Ok\n") 
+                    << std::endl;
+        
+        if (form1) delete form1;
+        if (form2) delete form2;
+        if (form3) delete form3;
     }
     catch (const std::exception& e)
     {
@@ -374,7 +530,8 @@ int main()
     // testShrubberyCreationForm();
     // testRobotomyRequestForm();
     // testPresidentialPardonForm();
-    testBureaucratExecuteForm();
+    //testBureaucratExecuteForm();
+    testIntern();
 
     return 0;
 }
