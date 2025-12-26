@@ -26,7 +26,6 @@ private:
 	unsigned int const      _gradeToSign;
 	unsigned int const      _gradeToEx;
 
-
 	static unsigned int gradeValid(unsigned int grade);
 
 public:

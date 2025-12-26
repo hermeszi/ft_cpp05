@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:53:29 by myuen             #+#    #+#             */
-/*   Updated: 2025/12/25 20:56:57 by myuen            ###   ########.fr       */
+/*   Updated: 2025/12/26 16:13:07 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ AForm* Intern::makeForm(string formName, string target)
 {
     for (int i = 0; i < 3; i++)
     {
-        if (this->formName[i] == formName)
+        if (this->formName[i] == formName) //both way to ref member formName :)
         {
-            cout << "Intern creates " << this->formName[i] << endl;
+            cout << "Intern creates " << Intern::formName[i] << endl;
             return (formCreator[i])(target);
         }
     }
